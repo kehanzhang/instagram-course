@@ -1,4 +1,6 @@
 import athensLogo from './assets/icon.png'
+import myImage from './my_image.jpeg'
+import myAsset from './assets/my_asset.jpeg'
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
         </p>
       </div>
       <p>this text won't be styled</p>
+      <img src={myImage} alt="My first post" />
+      <img src={myAsset} alt="My asset image" />
     </div>
   )
 }
