@@ -1,10 +1,10 @@
-import Post from './components/post';
+import HomePage from './screens/homePage';
+
 
 function App() {
   return (
-    <div className='min-h-screen w-screen flex flex-col justify-center items-center'>
-      <p className='text-2xl font-bold'>hello world</p>
-      <Post />
+    <div className='min-h-screen w-screen flex flex-col items-center'>
+      <HomePage/>
     </div>
   )
 }
