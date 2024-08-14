@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import myAsset from '../assets/my_asset.jpeg';
-import { Heart } from 'lucide-react';
+import { Heart, MessageCircle, Send, Bookmark } from 'lucide-react';
 
 function Post() {
   const [isLiked, setIsLiked] = useState(false);
@@ -10,12 +10,19 @@ function Post() {
   };
 
   return (
-    <div className='p-2'>
+    <div>
       <img src={myAsset} alt="my asset" />
-      <p>This is a post</p>
-      <div onClick={handleLikePressed}>
-        {isLiked ? <Heart fill="red" color="red" /> : <Heart />}
+      <div className='flex justify-between m-2'>
+        <div className='flex space-x-3'>
+          <div onClick={handleLikePressed}>
+            {isLiked ? <Heart fill="red" color="red" /> : <Heart />}
+          </div>
+          <MessageCircle />
+          <Send />
+        </div>
+        <Bookmark />
       </div>
+      <p>This is a post</p>
     </div>
   );
 };
