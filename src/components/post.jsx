@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import myAsset from '../assets/my_asset.jpeg';
-import { Heart, MessageCircle, Send, Bookmark } from 'lucide-react';
+import { Heart, MessageCircle, Send, Bookmark, CircleUserRound } from 'lucide-react';
 
 function Post() {
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const username = "johndoe"; // You can change this to any username you prefer
 
   const handleLikePressed = () => {
     setIsLiked(!isLiked);
@@ -16,6 +17,10 @@ function Post() {
 
   return (
     <div>
+      <div className="flex items-center p-2">
+        <CircleUserRound size={32} />
+        <span className="ml-2 font-bold">{username}</span>
+      </div>
       <img src={myAsset} alt="my asset" />
       <div className='flex justify-between m-2'>
         <div className='flex space-x-3'>
@@ -29,7 +34,10 @@ function Post() {
           {isBookmarked ? <Bookmark fill="black" color="black" /> : <Bookmark />}
         </div>
       </div>
-      <p>This is a post</p>
+      <div className="px-2 flex">
+        <p className="font-bold mr-1">{username}</p>
+        <p>This is a post</p>
+      </div>
     </div>
   );
 };
