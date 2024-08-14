@@ -4,9 +4,14 @@ import { Heart, MessageCircle, Send, Bookmark } from 'lucide-react';
 
 function Post() {
   const [isLiked, setIsLiked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
 
   const handleLikePressed = () => {
     setIsLiked(!isLiked);
+  };
+
+  const handleBookmarkPressed = () => {
+    setIsBookmarked(!isBookmarked);
   };
 
   return (
@@ -20,7 +25,9 @@ function Post() {
           <MessageCircle />
           <Send />
         </div>
-        <Bookmark />
+        <div onClick={handleBookmarkPressed}>
+          {isBookmarked ? <Bookmark fill="black" color="black" /> : <Bookmark />}
+        </div>
       </div>
       <p>This is a post</p>
     </div>
