@@ -1,26 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import useSWR from 'swr';
 import PostPreview from '../components/postPreview';
 
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
 function ExplorePage() {
-  const [exploreData, setExploreData] = useState([]);
+  const { data: exploreData, error, isLoading } = useSWR('https://instagram.athensapi.com/api/explore', fetcher);
 
-  useEffect(() => {
-    const fetchExploreData = async () => {
-      try {
-        const response = await fetch('https://instagram.athensapi.com/api/exploreWithDelay');
-        const data = await response.json();
-        setExploreData(data);
-      } catch (error) {
-        console.error('Error fetching explore data:', error);
-      }
-    };
-
-    fetchExploreData();
-  }, []);
-
-  if (exploreData.length === 0) {
-    return <p>Loading...</p>;
-  }
+  if (error) return <div>Failed to load</div>;
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div className="grid grid-cols-3 h-screen w-screen">
