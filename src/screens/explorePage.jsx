@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import useSWR from 'swr';
 import PostPreview from '../components/postPreview';
+import QueriedUsers from '../components/queriedUser';
 import { Search } from 'lucide-react';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 function ExplorePage() {
   const [searchQuery, setSearchQuery] = useState('');
-  const { data: exploreData, error, isLoading } = useSWR('https://instagram.athensapi.com/api/explore', fetcher);
+  const { data: exploreData, error: exploreError, isLoading: exploreLoading } = useSWR('https://instagram.athensapi.com/api/explore', fetcher);
+  const { data: searchData, error: searchError, isLoading: searchLoading } = useSWR(
+    searchQuery ? `https://instagram.athensapi.com/api/search?q=${searchQuery}` : null,
+    fetcher
+  );
 
-  if (error) return <div>Failed to load</div>;
-  if (isLoading) return <div>Loading...</div>;
+  if (exploreError || searchError) return <div>Failed to load</div>;
+  if (exploreLoading || searchLoading) return <div>Loading...</div>;
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -30,11 +35,19 @@ function ExplorePage() {
           />
         </div>
       </div>
-      <div className="grid grid-cols-3 flex-grow">
-        {exploreData.map((post, index) => (
-          <PostPreview key={index} imageUrl={post.image_url} />
-        ))}
-      </div>
+      {searchQuery && searchData ? (
+        <div>
+          {searchData.map((user, index) => (
+            <QueriedUsers key={index} profilePicUrl={user.profile_pic_url} username={user.username} name={user.name} />
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-3 flex-grow">
+          {exploreData.map((post, index) => (
+            <PostPreview key={index} imageUrl={post.image_url} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
