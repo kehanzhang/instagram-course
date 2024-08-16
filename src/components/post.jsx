@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import myAsset from '../assets/my_asset.jpeg';
-import { Heart, MessageCircle, Send, Bookmark, CircleUserRound } from 'lucide-react';
+import { Heart, MessageCircle, Send, Bookmark } from 'lucide-react';
+import Avatar from './avatar';
 
 function Post() {
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const username = "johndoe"; // You can change this to any username you prefer
-
   const handleLikePressed = () => {
     setIsLiked(!isLiked);
   };
@@ -18,7 +18,7 @@ function Post() {
   return (
     <div>
       <div className="flex items-center p-2">
-        <CircleUserRound size={32} />
+        <Avatar isForPost={true}/>
         <span className="ml-2 font-bold">{username}</span>
       </div>
       <img src={myAsset} alt="my asset" />
