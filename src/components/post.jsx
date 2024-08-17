@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Heart, MessageCircle, Send, Bookmark } from 'lucide-react';
 import Avatar from './avatar';
 
-function Post({ postData = {"post_id":"3426929691603728563_314216","user_id":51,"taken_at":"2024-08-04T03:24:35.000Z","caption_text":"Taking a party bus full of girls to see @oliviarodrigo #girldad","image_url":"https://pub-8d448faaa1ab42978ed5c4b22198f47d.r2.dev/instagram-mock-data/zuck/3426929691603728563_314216.jpg","width":750,"height":938,"like_count":720267,"comment_count":9270,"username":"zuck","profile_pic_url":"https://pub-8d448faaa1ab42978ed5c4b22198f47d.r2.dev/instagram-mock-data/zuck/profile_pic_zuck.jpg","name":"Mark Zuckerberg"}
-}) {
+function Post({ postData }) {
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
 
