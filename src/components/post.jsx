@@ -33,7 +33,7 @@ function Post({ postData }) {
   return (
     <div>
       <div className="flex items-center p-2">
-        <Avatar profilePicUrl={postData.profile_pic_url} isForPost={true} />
+        <Avatar src={postData.profile_pic_url} size="small" />
         <span className="ml-2 font-bold">{postData.username}</span>
       </div>
       <img src={postData.image_url} alt={postData.caption_text} />

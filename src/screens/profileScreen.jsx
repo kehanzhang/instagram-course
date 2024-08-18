@@ -1,5 +1,6 @@
 import React from 'react';
 import useSWR from 'swr';
+import Avatar from '../components/avatar';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -13,8 +14,13 @@ function ProfileScreen() {
   if (!profileData) return <div>Loading...</div>;
 
   return (
-    <div>
-      <p>{JSON.stringify(profileData)}</p>
+    <div className="w-full p-4">
+      <p className="text-xl font-bold mb-6">{profileData.username}</p>
+      <div className="flex flex-col items-start">
+        <Avatar src={profileData.profile_pic_url} size="large" />
+        <p className="font-semibold">{profileData.name}</p>
+        <p>{profileData.bio}</p>
+      </div>
     </div>
   );
 }
