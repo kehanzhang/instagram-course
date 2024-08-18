@@ -33,7 +33,7 @@ function ProfileScreen() {
           <p>{profileData.bio}</p>
         </div>
         <div className="flex space-x-2 mt-4">
-          <ProfileButton buttonText="Edit Profile" to="" />
+          <ProfileButton buttonText="Edit Profile" to="/editProfile" />
           <ProfileButton buttonText="Share Profile" to="" />
         </div>
       </div>
