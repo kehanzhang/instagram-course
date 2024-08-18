@@ -2,6 +2,7 @@ import React from 'react';
 import useSWR from 'swr';
 import Avatar from '../components/avatar';
 import ProfileStat from '../components/profileStat';
+import GridPostPreviews from '../components/gridPostPreviews';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -15,7 +16,8 @@ function ProfileScreen() {
   if (!profileData) return <div>Loading...</div>;
 
   return (
-    <div className="w-full p-4">
+    <div className="w-full">
+    <div className='p-4'>
       <p className="text-xl font-bold mb-6">{profileData.username}</p>
       <div className="flex items-center mb-4">
         <Avatar src={profileData.profile_pic_url} size="large" />
@@ -28,6 +30,10 @@ function ProfileScreen() {
       <div>
         <p className="font-semibold">{profileData.name}</p>
         <p>{profileData.bio}</p>
+      </div>
+      </div>
+      <div className="mt-2">
+        <GridPostPreviews postData={profileData.posts} />
       </div>
     </div>
   );
