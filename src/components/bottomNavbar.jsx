@@ -11,7 +11,7 @@ function BottomNavBar() {
         <Link to="/explore"><Search /></Link>
         <PlusSquare />
         <Heart />
-        <UserCircleIcon />
+        <Link to="/profile"><UserCircleIcon /></Link>
       </div>
     </nav>
   );
