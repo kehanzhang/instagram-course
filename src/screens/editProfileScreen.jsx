@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ChevronLeft } from 'lucide-react';
 import EditableProfileAttribute from '../components/EditableProfileAttribute';
 import Avatar from '../components/avatar';
+import toast from 'react-hot-toast';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -39,6 +40,7 @@ const EditProfileScreen = () => {
   }, [name, username, bio, profileData]);
 
   const handleDonePressed = async () => {
+    try {
       const response = await fetch('https://instagram.athensapi.com/api/updateUser', {
         method: 'PUT',
         headers: {
@@ -52,8 +54,17 @@ const EditProfileScreen = () => {
         }),
       });
 
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText);
+      }
+
       await mutate();
+      toast.success('Profile updated successfully!');
       navigate('/profile');
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   if (error) return <div>Failed to load profile data</div>;

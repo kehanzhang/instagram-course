@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import HomePage from './screens/homePage';
 import ExplorePage from './screens/explorePage';
 import ProfileScreen from './screens/profileScreen';
@@ -26,6 +27,7 @@ function App() {
   return (
     <Router>
       <AppContent />
+      <Toaster />
     </Router>
   );
 }
