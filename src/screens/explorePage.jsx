@@ -8,7 +8,13 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 function ExplorePage() {
   const [searchQuery, setSearchQuery] = useState('');
-  const { data: exploreData, error: exploreError, isLoading: exploreLoading } = useSWR('https://instagram.athensapi.com/api/explore', fetcher);
+  const { data: exploreData, error: exploreError, isLoading: exploreLoading } = useSWR(
+    'https://instagram.athensapi.com/api/explore', 
+    fetcher,
+    {
+      dedupingInterval: 60000, // 1 minute
+    }
+  );
   const { data: searchData, error: searchError, isLoading: searchLoading } = useSWR(
     searchQuery ? `https://instagram.athensapi.com/api/search?q=${searchQuery}` : null,
     fetcher

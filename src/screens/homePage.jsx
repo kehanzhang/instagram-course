@@ -6,7 +6,13 @@ import instagramLogo from '../assets/Logo-Instagram.png';
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 function HomePage() {
-  const { data: feedData, error } = useSWR('http://instagram.athensapi.com/api/feed', fetcher);
+  const { data: feedData, error } = useSWR(
+    'http://instagram.athensapi.com/api/feed', 
+    fetcher,
+    {
+      dedupingInterval: 60000, // 1 minute
+    }
+  );
 
   if (error) return <div>Failed to load</div>;
   if (!feedData) return <div>Loading...</div>;
