@@ -10,7 +10,7 @@ function HomePage() {
     'http://instagram.athensapi.com/api/feed', 
     fetcher,
     {
-      dedupingInterval: 60000, // 1 minute
+      dedupingInterval: 60000,
     }
   );
 

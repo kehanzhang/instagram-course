@@ -12,7 +12,7 @@ function ExplorePage() {
     'https://instagram.athensapi.com/api/explore', 
     fetcher,
     {
-      dedupingInterval: 60000, // 1 minute
+      dedupingInterval: 60000,
     }
   );
   const { data: searchData, error: searchError, isLoading: searchLoading } = useSWR(
