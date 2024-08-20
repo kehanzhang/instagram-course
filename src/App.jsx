@@ -9,7 +9,7 @@ import BottomNavBar from './components/bottomNavbar';
 
 function AppContent() {
   const location = useLocation();
-  const showBottomNavBar = location.pathname !== '/editProfile';
+  const showBottomNavBar = location.pathname !== '/editProfile' && location.pathname !== '/createPost';
 
   return (
     <div className='min-h-screen w-screen flex flex-col items-center'>
