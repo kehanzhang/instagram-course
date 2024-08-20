@@ -4,6 +4,7 @@ import HomePage from './screens/homePage';
 import ExplorePage from './screens/explorePage';
 import ProfileScreen from './screens/profileScreen';
 import EditProfileScreen from './screens/editProfileScreen';
+import CreatePostScreen from './screens/createPostScreen';
 import BottomNavBar from './components/bottomNavbar';
 
 function AppContent() {
@@ -17,6 +18,7 @@ function AppContent() {
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/editProfile" element={<EditProfileScreen />} />
+        <Route path="/createPost" element={<CreatePostScreen />} />
       </Routes>
       {showBottomNavBar && <BottomNavBar />}
     </div>

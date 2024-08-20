@@ -9,7 +9,7 @@ function BottomNavBar() {
       <div className="flex justify-around items-center h-16">
         <Link to="/"><Home /></Link>
         <Link to="/explore"><Search /></Link>
-        <PlusSquare />
+        <Link to="/createPost"><PlusSquare /></Link>
         <Heart />
         <Link to="/profile"><UserCircleIcon /></Link>
       </div>
