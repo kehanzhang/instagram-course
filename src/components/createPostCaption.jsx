@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { ChevronLeft } from 'lucide-react';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 function CreatePostCaption({ selectedImage, setSelectedImage }) {
   const [caption, setCaption] = useState('');
+  const navigate = useNavigate();
 
   const handleBackClick = () => {
     setSelectedImage(null);
@@ -10,6 +13,40 @@ function CreatePostCaption({ selectedImage, setSelectedImage }) {
 
   const handleCaptionChange = (e) => {
     setCaption(e.target.value);
+  };
+
+  const handleCreatePost = async () => {
+    try {
+      const response = await fetch('https://instagram.athensapi.com/api/getImageUploadUrl', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          accessKey: import.meta.env.VITE_APIaccessKey,
+          fileName: selectedImage.name,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get presigned URL');
+      }
+
+      const { uploadURL, publicURL } = await response.json();
+
+      await fetch(uploadURL, {
+        method: 'PUT',
+        body: selectedImage.file,
+        headers: {
+          'Content-Type': selectedImage.type,
+        },
+      });
+
+      toast.success(`Public URL: ${publicURL}`);
+      navigate('/');
+    } catch (error) {
+      toast.error(`Failed to create post. Error: ${error}`);
+    }
   };
 
   return (
@@ -34,8 +71,11 @@ function CreatePostCaption({ selectedImage, setSelectedImage }) {
           />
         </div>
       </div>
-      <button className="text-white bg-blue-500 py-2 w-full rounded-md font-semibold">
-          Share
+      <button 
+        className="text-white bg-blue-500 py-2 w-full rounded-md font-semibold"
+        onClick={handleCreatePost}
+      >
+        Share
       </button>
     </div>
   );
